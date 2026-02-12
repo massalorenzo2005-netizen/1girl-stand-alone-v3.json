@@ -1,0 +1,161 @@
+{
+  "input": {
+    "workflow": {
+      "6": {
+        "inputs": {
+          "text": "1girl, in a polished and casual glam selfie with a k-beauty aesthetic, a beautiful young East Asian woman is captured in a centered, head-and-shoulders close-up, posing with her head slightly tilted and a soft, subtle smile, her dark brown eyes holding a direct gaze from under a heavy fringe of vibrant, shaggy, layered pink hair, her face featuring dramatic false eyelashes, sharp winged eyeliner, prominent pink blush, and overlined glossy lips, creating a \"glass skin\" effect with a dewy, oily shine and strong specular highlights on her nose and cheekbones that completely obscures any natural skin texture for an unnaturally smooth, poreless, airbrushed appearance, while she wears a cream-colored eyelet lace camisole with thin spaghetti straps and is accessorized with a layered silver chain necklace featuring a Vivienne Westwood-style orb pendant, all within a brightly lit indoor hair salon in a high-resolution professional DSLR photo characterized by soft, diffuse frontal lighting that creates a sharp, clean image with very low noise.",
+          "clip": [
+            "99",
+            0
+          ]
+        },
+        "class_type": "CLIPTextEncode",
+        "_meta": {
+          "title": "CLIP Text Encode (Positive Prompt)"
+        }
+      },
+      "7": {
+        "inputs": {
+          "text": "cinematic, glossy finish, shallow depth of field, cinematic bokeh, uncanny anatomy, frame-perfect symmetry, blurred background, fat, low resolution",
+          "clip": [
+            "99",
+            0
+          ]
+        },
+        "class_type": "CLIPTextEncode",
+        "_meta": {
+          "title": "CLIP Text Encode (Negative Prompt)"
+        }
+      },
+      "8": {
+        "inputs": {
+          "samples": [
+            "75",
+            0
+          ],
+          "vae": [
+            "39",
+            0
+          ]
+        },
+        "class_type": "VAEDecode",
+        "_meta": {
+          "title": "VAEDecode"
+        }
+      },
+      "39": {
+        "inputs": {
+          "filename": "qwen_image_vae.safetensors"
+        },
+        "class_type": "VAELoader",
+        "_meta": {
+          "title": "VAELoader"
+        }
+      },
+      "60": {
+        "inputs": {
+          "filename_prefix": "1GIRL_V3",
+          "images": [
+            "8",
+            0
+          ]
+        },
+        "class_type": "SaveImage",
+        "_meta": {
+          "title": "Save 1GIRL Image"
+        }
+      },
+      "66": {
+        "inputs": {
+          "value": 3.1,
+          "model": [
+            "101",
+            0
+          ]
+        },
+        "class_type": "ModelSamplingAuraFlow",
+        "_meta": {
+          "title": "ModelSamplingAuraFlow"
+        }
+      },
+      "75": {
+        "inputs": {
+          "value": 0.5,
+          "model": [
+            "66",
+            0
+          ],
+          "positive": [
+            "6",
+            0
+          ],
+          "negative": [
+            "7",
+            0
+          ],
+          "latent_image": [
+            "95",
+            0
+          ],
+          "seed": [
+            "94",
+            0
+          ]
+        },
+        "class_type": "ClownsharKSampler_Beta",
+        "_meta": {
+          "title": "✨ 1GIRL SAMPLER"
+        }
+      },
+      "94": {
+        "inputs": {
+          "value": 1111111
+        },
+        "class_type": "Seed Generator",
+        "_meta": {
+          "title": "Seed Generator"
+        }
+      },
+      "95": {
+        "inputs": {
+          "value": 1440
+        },
+        "class_type": "EmptyLatentImage",
+        "_meta": {
+          "title": "EmptyLatentImage"
+        }
+      },
+      "96": {
+        "inputs": {
+          "filename": "split_files/diffusion_models/qwen_image_bf16.safetensors"
+        },
+        "class_type": "UNETLoader",
+        "_meta": {
+          "title": "UNETLoader"
+        }
+      },
+      "99": {
+        "inputs": {
+          "filename": "qwen_2.5_vl_7b.safetensors"
+        },
+        "class_type": "CLIPLoader",
+        "_meta": {
+          "title": "CLIPLoader"
+        }
+      },
+      "101": {
+        "inputs": {
+          "filename": "1GIRL_QWEN_V3.safetensors",
+          "model": [
+            "96",
+            0
+          ]
+        },
+        "class_type": "LoraLoaderModelOnly",
+        "_meta": {
+          "title": "LoraLoaderModelOnly"
+        }
+      }
+    }
+  }
+}
